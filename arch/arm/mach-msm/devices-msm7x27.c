@@ -63,6 +63,18 @@ static struct resource resources_uart2[] = {
 	},
 };
 
+static struct resource resources_uart3[] = {
+	{
+		.start	= INT_UART3,
+		.end	= INT_UART3,
+		.flags	= IORESOURCE_IRQ,
+	},
+	{
+		.start	= MSM_UART3_PHYS,
+		.end	= MSM_UART3_PHYS + MSM_UART3_SIZE - 1,
+		.flags	= IORESOURCE_MEM,
+	},
+};
 struct platform_device msm_device_uart1 = {
 	.name	= "msm_serial",
 	.id	= 0,
@@ -75,6 +87,13 @@ struct platform_device msm_device_uart2 = {
 	.id	= 1,
 	.num_resources	= ARRAY_SIZE(resources_uart2),
 	.resource	= resources_uart2,
+};
+
+struct platform_device msm_device_uart3 = {
+	.name	= "msm_serial",
+	.id	= 2,
+	.num_resources	= ARRAY_SIZE(resources_uart3),
+	.resource	= resources_uart3,
 };
 
 #define MSM_UART1DM_PHYS      0xA0200000
@@ -419,17 +438,10 @@ static struct resource resources_sdc1[] = {
 		.flags	= IORESOURCE_IRQ,
 	},
 	{
-		.name	= "sdcc_dma_chnl",
-		.start	= DMOV_SDC1_CHAN,
-		.end	= DMOV_SDC1_CHAN,
+		.start	= 8,
+		.end	= 8,
 		.flags	= IORESOURCE_DMA,
 	},
-	{
-		.name	= "sdcc_dma_crci",
-		.start	= DMOV_SDC1_CRCI,
-		.end	= DMOV_SDC1_CRCI,
-		.flags	= IORESOURCE_DMA,
-	}
 };
 
 static struct resource resources_sdc2[] = {
@@ -444,17 +456,10 @@ static struct resource resources_sdc2[] = {
 		.flags	= IORESOURCE_IRQ,
 	},
 	{
-		.name	= "sdcc_dma_chnl",
-		.start	= DMOV_SDC2_CHAN,
-		.end	= DMOV_SDC2_CHAN,
+		.start	= 8,
+		.end	= 8,
 		.flags	= IORESOURCE_DMA,
 	},
-	{
-		.name	= "sdcc_dma_crci",
-		.start	= DMOV_SDC2_CRCI,
-		.end	= DMOV_SDC2_CRCI,
-		.flags	= IORESOURCE_DMA,
-	}
 };
 
 static struct resource resources_sdc3[] = {
@@ -469,15 +474,8 @@ static struct resource resources_sdc3[] = {
 		.flags	= IORESOURCE_IRQ,
 	},
 	{
-		.name	= "sdcc_dma_chnl",
-		.start	= DMOV_SDC3_CHAN,
-		.end	= DMOV_SDC3_CHAN,
-		.flags	= IORESOURCE_DMA,
-	},
-	{
-		.name	= "sdcc_dma_crci",
-		.start	= DMOV_SDC3_CRCI,
-		.end	= DMOV_SDC3_CRCI,
+		.start	= 8,
+		.end	= 8,
 		.flags	= IORESOURCE_DMA,
 	},
 };
@@ -494,15 +492,8 @@ static struct resource resources_sdc4[] = {
 		.flags	= IORESOURCE_IRQ,
 	},
 	{
-		.name	= "sdcc_dma_chnl",
-		.start	= DMOV_SDC4_CHAN,
-		.end	= DMOV_SDC4_CHAN,
-		.flags	= IORESOURCE_DMA,
-	},
-	{
-		.name	= "sdcc_dma_crci",
-		.start	= DMOV_SDC4_CRCI,
-		.end	= DMOV_SDC4_CRCI,
+		.start	= 8,
+		.end	= 8,
 		.flags	= IORESOURCE_DMA,
 	},
 };

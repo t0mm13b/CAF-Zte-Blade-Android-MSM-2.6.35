@@ -726,10 +726,10 @@ static int msm_hsusb_rpc_phy_reset(void __iomem *addr)
         return msm_hsusb_phy_reset();
 }
 #endif
-static int msm_otg_rpc_phy_reset(void __iomem *regs)
-{
-	return msm_hsusb_phy_reset();
-}
+//static int msm_otg_rpc_phy_reset(void __iomem *regs)
+//{
+//	return msm_hsusb_phy_reset();
+//}
 
 static struct msm_otg_platform_data msm_otg_pdata = {
 	.rpc_connect	= hsusb_rpc_connect,
@@ -750,7 +750,7 @@ static struct msm_otg_platform_data msm_otg_pdata = {
 };
 
 #ifdef CONFIG_USB_GADGET
-static struct msm_hsusb_gadget_platform_data msm_gadget_pdata;
+//static struct msm_hsusb_gadget_platform_data msm_gadget_pdata;
 #endif
 #endif
 
@@ -1334,7 +1334,7 @@ static int bluetooth_power(int on)
 		}
 
 		/* units of mV, steps of 50 mV */
-		rc = vreg_set_level(vreg_bt, 2600);
+		rc = vreg_set_level(vreg_bt, 1800); 
 		if (rc) {
 			printk(KERN_ERR "%s: vreg set level failed (%d)\n",
 			       __func__, rc);
@@ -1893,10 +1893,8 @@ static struct platform_device *devices[] __initdata = {
 	&msm_wlan_ar6000_pm_device,
 /* ATHENV */
 
-#if 0
 #if !defined(CONFIG_MSM_SERIAL_DEBUGGER)
 	&msm_device_uart3,
-#endif
 #endif
 	&msm_device_smd,
 	&msm_device_dmov,
@@ -2528,7 +2526,7 @@ static void __init msm7x2x_init(void)
 			PRE_EMPHASIS_WITH_20_PERCENT;
 		msm_otg_pdata.drv_ampl = HS_DRV_AMPLITUDE_5_PERCENT;
 		msm_otg_pdata.cdr_autoreset = CDR_AUTO_RESET_ENABLE;
-		msm_otg_pdata.phy_reset = msm_otg_rpc_phy_reset;
+		msm_otg_pdata.phy_reset_sig_inverted = 1;
 	}
 	if (machine_is_msm7x27_surf() || machine_is_msm7x27_ffa()) {
 		msm_otg_pdata.pemp_level =
@@ -2539,11 +2537,10 @@ static void __init msm7x2x_init(void)
 	}
 
 #ifdef CONFIG_USB_GADGET
-	msm_otg_pdata.swfi_latency =
-		msm7x27_pm_data
-		[MSM_PM_SLEEP_MODE_RAMP_DOWN_AND_WAIT_FOR_INTERRUPT].latency;
-	msm_device_gadget_peripheral.dev.platform_data = &msm_gadget_pdata;
-	msm_gadget_pdata.is_phy_status_timer_on = 1;
+//	msm_gadget_pdata.swfi_latency =
+//		msm7x27_pm_data
+//		[MSM_PM_SLEEP_MODE_RAMP_DOWN_AND_WAIT_FOR_INTERRUPT].latency;
+//	msm_device_gadget_peripheral.dev.platform_data = &msm_gadget_pdata;
 #endif
 #endif
 #if defined(CONFIG_TSIF) || defined(CONFIG_TSIF_MODULE)
